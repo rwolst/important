@@ -1,0 +1,91 @@
+snippet "con = lite.connect" "Select from a database"
+con = lite.connect(${1:DataBase.db})
+cur = con.cursor()
+
+SQL = "SELECT ${2:Column} FROM ${3:TableName}"
+with con:
+    cur.execute(SQL)
+    data = cur.fetchall()
+endsnippet
+
+snippet "con = lite.connect" "Insert into a database"
+con = lite.connect(${1:DataBase.db})
+cur = con.cursor()
+
+SQL = "INSERT OR REPLACE INTO ${2:TableName}(x, y, z) VALUES (1,2,3)"
+with con:
+    cur.execute(SQL)
+endsnippet
+
+snippet "con = lite.connect" "Create table in a database"
+con = lite.connect(${1:DataBase.db})
+cur = con.cursor()
+
+SQL_table = "CREATE TABLE ${2:TableName}(x TEXT, y INTEGER, z REAL, PRIMARY KEY(x,y))"
+SQL_index = "CREATE UNIQUE INDEX $2_Index ON $2(x, y)"
+with con:
+    cur.execute(SQL_table)
+    cur.execute(SQL_index)
+endsnippet
+
+snippet "con = lite.connect" "Drop table from a database"
+con = lite.connect(${1:DataBase.db})
+cur = con.cursor()
+
+SQL = "DROP TABLE ${2:TableName}"
+with con:
+    cur.execute(SQL)
+endsnippet
+
+snippet "import argparse" "A standard argument parser template"
+import argparse
+
+parser = argparse.ArgumentParser(description=${1:'Process some integers.'})
+parser.add_argument(${2:'N_integers'}, type=${3:int}, nargs=${4:N}, help=${5:'N integers for the accumulator'})
+parser.add_argument(${6:'--integer'}, type=${7:int}, nargs=${8:?}, help=${9:'1 integer for the accumulator or if none entered use default'}, default = ${10:1})
+parser.add_argument(${11:'--all_Integers'}, type=${12:int}, nargs=${13:*}, help=${14:'Gather all integers into a list'})
+parser.add_argument(${15:'--all_Integers_not_none'}, type=${16:int}, nargs=${17:+}, help=${18:'Gather all integers into a list but there can\'t be none'})
+parser.add_argument(${19:'--sum'}, action=${20:'store_const'}, ${21:const=sum,} ${22:default=max,} help=${23:'sum the integers (default: find the max)'})
+parser.add_argument(${24:'--print'}, action=${25:'store_true'}, help=${26:'Store true if we want to print'})
+
+args = parser.parse_args()
+endsnippet
+
+snippet "from __future__ import division" "From future import division"
+from __future__ import division
+endsnippet
+
+snippet "pdb" "pdb debug template"
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet "if __name__ == "__main__"" "If name is main template"
+if __name__ == "__main__":
+    
+endsnippet
+
+snippet "def" "Create a function definition template"
+def ${1:functionName}(${2:arg1}, ${3:arg2}, ${4:arg3}):
+    """${5:Function Description}
+       Input:
+           $2: ${6:Arg1 Description}
+	   $3: ${7:Arg2 Description}
+	   $4: ${8:Arg3 Description}
+       Output:
+           ${9:Output}: ${10:Output Description}
+    """
+    return $9
+endsnippet 
+
+snippet "import unittest" "A unittest template"
+import unittest
+
+class ${1:ClassName}(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        "Run this first before any tests"
+
+    def test_${2:TestName}(self):
+        "A test"
+endsnippet
+
