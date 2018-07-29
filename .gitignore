@@ -3,4 +3,3 @@ README.html
 .vim/bundle
 .vim/view
 .vim/.netrwhist
-!.vim/bundle/.keep
