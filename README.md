@@ -26,3 +26,14 @@ The `make_symlinks.sh` script automatically creates symlinks to `~` for
     .tmux_conf
     .inputrc
     .vim
+
+## Vim
+In order to make Vim work, you need to download `Vundle` into `.vim/bundle`.
+This is the Vim package manager and will then download all other packages.
+
+This can be downlaoded from [here](https://github.com/VundleVim/Vundle.vim). Or
+alternatively you can just run the commands
+
+    git clone https://github.com/VundleVim/Vundle.vim.git /<path_to_repo>/.vim/bundle/Vundle.vim
+
+Then launch Vim and run `:PluginInstall`.
