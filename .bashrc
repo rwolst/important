@@ -150,3 +150,8 @@ alias cdfzy="cd \$(find -type d | fzy)"
 
 # Use vi keybindings.
 set -o vi
+
+# Add texlive binaries to path.
+PATH=$HOME/.local/texlive/2018/bin/x86_64-linux:$PATH; export PATH
+MANPATH=$HOME/.local/texlive/2018/texmf-dist/doc/man:$MANPATH; export MANPATH
+INFOPATH=$HOME/.local/texlive/2018/texmf-dist/doc/info:$INFOPATH; export INFOPATH
