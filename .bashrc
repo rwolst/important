@@ -104,10 +104,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -155,3 +151,25 @@ set -o vi
 PATH=$HOME/.local/texlive/2018/bin/x86_64-linux:$PATH; export PATH
 MANPATH=$HOME/.local/texlive/2018/texmf-dist/doc/man:$MANPATH; export MANPATH
 INFOPATH=$HOME/.local/texlive/2018/texmf-dist/doc/info:$INFOPATH; export INFOPATH
+
+# Create a function for sourcing a virtual environment.
+act () {
+    # Find any potnetial virtual environment.
+    potential_envs=$(find . -regex '^.*env/bin/activate')
+    total_envs=$(find . -regex '^.*env/bin/activate' | wc -w)
+
+    # If there is only one possibility then source it, otherwise return a
+    # warning.
+    if [ $total_envs == 0 ]
+    then
+        echo "Found no potential virtual environments."
+    elif [ $total_envs == 1 ]
+    then
+        echo "Sourcing virtual environment:"
+        echo "$potential_envs"
+        source $potential_envs
+    else
+        echo "Not sourcing, found multiple virtual environments:"
+        echo "$potential_envs"
+    fi
+}
