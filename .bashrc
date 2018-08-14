@@ -173,3 +173,30 @@ act () {
         echo "$potential_envs"
     fi
 }
+
+# Create virtual environment (awkward due to non pip).
+# See here for explanation:
+# http://thefourtheye.in/2014/12/30/Python-venv-problem-with-ensurepip-in-Ubuntu/
+python3_venv () {
+    # The name is in $1 and typically will be env.
+    echo "Parameter #1 is $1"
+    echo "Parameter length is $#"
+    if [ $# == 0 ]
+    then
+        echo "Found no arguments to function, so using environment name 'env'."
+        /usr/bin/python3.6 -m venv env --without-pip
+        cd env
+    else
+        /usr/bin/python3.6 -m venv $1 --without-pip
+        cd $1
+    fi
+    source bin/activate
+    echo "Running in virtual environment: $VIRTUAL_ENV"
+    wget https://bootstrap.pypa.io/get-pip.py
+
+    # Can use the environment python3 from now on.
+    python3 get-pip.py
+    rm get-pip.py
+    cd ..
+}
+
