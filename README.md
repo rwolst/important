@@ -4,6 +4,8 @@ my `.bashrc`, `.vimrc`, `.tmux.conf`, `.inputrc` and `.vim` folder (without the
 `bundle` and `view` subfolders, which can be redownloaded using `vundle` and
 are irrelevant to a new system respectively).
 
+Note that the `Vim` packages require `Vim 8`.
+
 ## .bashrc
 Note that `bash` always looks for the `.bashrc` in the `~` directory, so it
 is recommended (in order to easily keep the true `.bashrc` under version
