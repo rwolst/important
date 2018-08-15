@@ -155,8 +155,8 @@ INFOPATH=$HOME/.local/texlive/2018/texmf-dist/doc/info:$INFOPATH; export INFOPAT
 # Create a function for sourcing a virtual environment.
 act () {
     # Find any potnetial virtual environment.
-    potential_envs=$(find . -regex '^.*env/bin/activate')
-    total_envs=$(find . -regex '^.*env/bin/activate' | wc -w)
+    potential_envs=$(find . -regex '^\./.*env/bin/activate')
+    total_envs=$(find . -regex '^\./.*env/bin/activate' | wc -w)
 
     # If there is only one possibility then source it, otherwise return a
     # warning.
