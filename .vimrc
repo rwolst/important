@@ -21,6 +21,8 @@ Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
 Plugin 'machakann/vim-sandwich'
 Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-vinegar'
+Plugin 'jamessan/vim-gnupg'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -149,6 +151,13 @@ set cmdheight=2
  
 " Display line numbers on the left
 set number
+
+" Use hybrid numbering on in focus window, otherwise use absolute.
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &nu | set nornu | endif
+augroup END
  
 " Quickly time out on keycodes, but never time out on mappings
 set notimeout ttimeout ttimeoutlen=200
@@ -223,11 +232,52 @@ noremap <Right> <NOP>
 "------------------------------------------------------------
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_insertion = 1
+"py3 << EOF
+"import os
+"import sys
+"import site
+"
+"if 'VIRTUAL_ENV' in os.environ:
+"    # Get the base directory of the virtual environment.
+"    base_dir = os.environ['VIRTUAL_ENV']
+"
+"    # Prepend the bin directory to the path.
+"    bin_dir = base_dir + '/bin'
+"    os.environ['PATH'] = os.pathsep.join([bin_dir] + \
+"                         os.environ.get("PATH", "").split(os.pathsep))
+"
+"    # Add virtual environment site-packages to host python.
+"    IS_PYPY = hasattr(sys, "pypy_version_info")
+"    IS_JYTHON = sys.platform.startswith("java")
+"    if IS_JYTHON:
+"        site_packages = os.path.join(base_dir, "Lib", "site-packages")
+"    elif IS_PYPY:
+"        site_packages = os.path.join(base_dir, "site-packages")
+"    else:
+"        IS_WIN = sys.platform == "win32"
+"        if IS_WIN:
+"            site_packages = os.path.join(base_dir, "Lib", "site-packages")
+"        else:
+"            site_packages = os.path.join(base_dir, "lib",
+"                "python%s" % sys.version[:3], "site-packages")
+"
+"    prev = set(sys.path)
+"    site.addsitedir(site_packages)
+"    sys.real_prefix = sys.prefix
+"    sys.prefix = base_dir
+"
+"    # Move added items to front of path in place.
+"    new = list(sys.path)
+"    sys.path[:] = [i for i in new if i not in prev] + \
+"                  [i for i in new if i in prev]
+"
+"EOF
 
 "------------------------------------------------------------
 " Ale
 let g:ale_linters = {'python': ['flake8', 'pylint']}
 let g:ale_virtualenv_dir_names = ['.env', 'env', 've-py3', 've', 'virtualenv', 'venv', 'citadel_env']
+let g:ale_use_global_executables = 0
 
 "------------------------------------------------------------
 " UltiSnips

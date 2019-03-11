@@ -42,13 +42,14 @@ import argparse
 
 parser = argparse.ArgumentParser(description=${1:'Process some integers.'})
 parser.add_argument(${2:'N_integers'}, type=${3:int}, nargs=${4:N}, help=${5:'N integers for the accumulator'})
-parser.add_argument(${6:'--integer'}, type=${7:int}, nargs=${8:?}, help=${9:'1 integer for the accumulator or if none entered use default'}, default = ${10:1})
+parser.add_argument(${6:'--integer'}, type=${7:int}, nargs=${8:?}, help=${9:'1 integer for the accumulator or if none entered use default'}, default=${10:1})
 parser.add_argument(${11:'--all_Integers'}, type=${12:int}, nargs=${13:*}, help=${14:'Gather all integers into a list'})
 parser.add_argument(${15:'--all_Integers_not_none'}, type=${16:int}, nargs=${17:+}, help=${18:'Gather all integers into a list but there can\'t be none'})
 parser.add_argument(${19:'--sum'}, action=${20:'store_const'}, ${21:const=sum,} ${22:default=max,} help=${23:'sum the integers (default: find the max)'})
 parser.add_argument(${24:'--print'}, action=${25:'store_true'}, help=${26:'Store true if we want to print'})
 
-args = parser.parse_args()
+FLAGS, unparsed = parser.parse_known_args()
+config = FLAGS.__dict__.copy()
 endsnippet
 
 snippet "from __future__ import division" "From future import division"
@@ -89,3 +90,16 @@ class ${1:ClassName}(unittest.TestCase):
         "A test"
 endsnippet
 
+snippet "assertclose" "Assert 2 objects are close template"
+assert ((${1:obj1} - ${2:obj2})**2 < 1e-${3:tol}).all()
+endsnippet
+
+snippet "ospath" "Path for the calling file in Python"
+os.path.dirname(os.path.abspath(__file__))
+endsnippet
+
+snippet "validvalue" "Raise exception if value not valid"
+if ${1:value} not in ${2:valid_list}:
+    raise Exception("$1 must be in:\n\t%s\ngot\n\t%s"
+                    % ($2, $1))
+endsnippet
