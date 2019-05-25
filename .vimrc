@@ -19,10 +19,13 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
 Plugin 'SirVer/ultisnips'
-Plugin 'machakann/vim-sandwich'
+Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-vinegar'
 Plugin 'jamessan/vim-gnupg'
+Plugin 'FooSoft/vim-argwrap'
+Plugin 'alvan/vim-closetag'
+Plugin 'tpope/vim-abolish'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -306,3 +309,7 @@ endfunction
 nnoremap <leader>e :call FzyCommand("find -type f", ":e")<cr>
 nnoremap <leader>v :call FzyCommand("find -type f", ":vs")<cr>
 nnoremap <leader>s :call FzyCommand("find -type f", ":sp")<cr>
+
+"------------------------------------------------------------
+" argwrap
+nnoremap <silent> <leader>a :ArgWrap<CR>
